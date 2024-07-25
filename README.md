@@ -1,17 +1,15 @@
 ### Adaptive Seam Carving Application
 
-
 #### Overview
 
-This application is a seam carving tool that allows users to remove vertical seams from an image to reduce its width. The app uses various image processing techniques to calculate energy maps and determine which seams to remove, enhancing image retargeting. The seam carving process takes into account the image's saliency, depth, gradient, and entropy maps.
-
+This application is a seam carving tool designed to reduce the width of an image by removing vertical seams. It uses advanced image processing techniques to calculate energy maps and determine which seams to remove, enhancing image retargeting. The process considers the image's saliency, depth, gradient, and entropy maps.
 
 ### Key Features
 
-1. **Energy Calculation**: Computes an energy map based on edge detection, saliency, depth, and entropy maps to guide seam removal.
-2. **Seam Finding and Removal**: Identifies and removes the lowest energy seams iteratively.
-3. **Seam Visualization**: Highlights seams on the image during the carving process for visualization.
-4. **Graphical User Interface (GUI)**: A Tkinter-based GUI for user interaction, allowing easy input of parameters and real-time progress updates.
+1. **Energy Calculation**: Computes an energy map using edge detection, saliency, depth, and entropy maps to guide seam removal. 🔍
+2. **Seam Finding and Removal**: Identifies and removes the lowest energy seams iteratively. ✂️
+3. **Seam Visualization**: Highlights seams on the image during the carving process for better visualization. 🌟
+4. **Graphical User Interface (GUI)**: A Tkinter-based GUI for user interaction, allowing easy input of parameters and real-time progress updates. 🖥️
 
 ### Dependencies
 
@@ -33,8 +31,9 @@ This application is a seam carving tool that allows users to remove vertical sea
    ```bash
    pip install opencv-python-headless numpy scikit-image pillow
    ```
-3. **Sample Dataset**
-    In the sample_dataset folder, each subfolder should be named according to the image category (e.g., Diana). Each subfolder should contain the saliency map and depth map for the corresponding images.
+3. **Sample Dataset**:
+   In the `sample_dataset` folder, each subfolder should be named according to the image category (e.g., Diana). Each subfolder should contain the saliency map and depth map for the corresponding images. 🗂️
+
 ### Usage
 
 1. **Run the Application**:
@@ -43,13 +42,13 @@ This application is a seam carving tool that allows users to remove vertical sea
    ```
 
 2. **GUI Interaction**:
-   - **Enter Category**: Input the image category (e.g., Diana, Baby, Snowman).
-   - **Number of Columns to Delete**: Specify the number of vertical seams (columns) to remove.
-   - **Start Seam Carving**: Click the button to begin the process.
+   - **Enter Category**: Input the image category (e.g., Diana, Baby, Snowman). 🖼️
+   - **Number of Columns to Delete**: Specify the number of vertical seams (columns) to remove. 📉
+   - **Start Seam Carving**: Click the button to begin the process. 🚀
 
 3. **Output**:
-   - The application will display the image with highlighted seams during the process.
-   - Upon completion, the output image will be saved to the specified directory.
+   - The application will display the image with highlighted seams during the process. 👁️
+   - Upon completion, the output image will be saved to the specified directory. 💾
 
 ### Energy Calculation Details
 
@@ -73,15 +72,15 @@ In the `calculate_energy` function, we compute the energy map for seam carving u
    ```
 
 3. **Saliency Map**:
-   - Similar to the gradient map, calculate the saliency map and split it into blocks.
+   - Calculate the saliency map and split it into blocks.
    - Select the top 120 blocks based on their luminance levels and multiply the pixels in these blocks by a factor of 1.5.
 
 4. **Depth Map**:
-   - Apply an Otsu thresholding method to the depth map.
+   - Apply Otsu thresholding to the depth map.
    - Multiply the pixels that exceed the Otsu threshold by a factor of 7.
 
 5. **Combining Energy Maps**:
-   - Finally, combine the adjusted energy maps using specific weights:
+   - Combine the adjusted energy maps using specific weights:
 
    ```python
    energy_combined = (
@@ -110,16 +109,21 @@ In the `calculate_energy` function, we compute the energy map for seam carving u
    - **50% Decrease**:
      ![Snowman 50% Decrease](./result/Snowman_output_227.png)
 
-
 ### Comparison to Existing Methods
 
 Our seam carving approach provides visually superior results compared to the methods outlined in the paper "Seam Carving for Content-Aware Image Resizing" (ICIP 2014) [link to paper](https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICIP-2014/Papers/1569913319.pdf). Specifically, for images categorized as 'people' and 'snowman,' our method excels in preserving important content and minimizing visual distortion. 
 
 In particular:
 
-- **For 'people' images**: Our approach maintains the integrity of facial features and other critical details better, resulting in more natural-looking resized images.
+- **For 'people' images**: Our approach maintains the integrity of facial features and other critical details better, resulting in more natural-looking resized images. 👤✨
   
-- **For 'snowman' images**: The preservation of the snowman's shape and details is notably better, avoiding the unnatural distortions that can occur with other seam carving techniques. 
+- **For 'snowman' images**: The preservation of the snowman's shape and details is notably better, avoiding the unnatural distortions that can occur with other seam carving techniques. ⛄🔍
 
-These improvements in visual quality make our method a preferable choice for applications requiring high fidelity in image retargeting.
+These improvements in visual quality make our method a preferable choice for applications requiring high fidelity in image retargeting. 🏆
 
+---
+
+🎉 **We’re excited about contributions and forks!** If you have any questions or suggestions, please feel free to reach out to us:
+
+- Mohammad Hossein: [m.heidari@mi.iut.ac.ir](mailto:m.heidari@mi.iut.ac.ir) 📧
+- AmirReza: [a.zahedinejad@ec.iut.ac.ir](mailto:a.zahedinejad@ec.iut.ac.ir) 📧
