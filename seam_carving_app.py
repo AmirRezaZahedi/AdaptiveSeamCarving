@@ -1,4 +1,5 @@
 import cv2
+import os
 import numpy as np
 from skimage.util import view_as_windows
 import tkinter as tk
@@ -34,10 +35,8 @@ def calculate_energy(image, saliency_map, depth_map, entropy_energy_normalized):
     flattened_indices = np.argsort(avg_gradient_blocks, axis=None)[-87:]
     largest_blocks_indices = np.unravel_index(flattened_indices, avg_gradient_blocks.shape)
     
-
     adjusted_energy_edge = energy_edge.copy()
     
-
     for i, j in zip(*largest_blocks_indices):
         block = energy_edge[i*block_size_y:(i+1)*block_size_y, j*block_size_x:(j+1)*block_size_x]
         adjusted_energy_edge[i*block_size_y:(i+1)*block_size_y, j*block_size_x:(j+1)*block_size_x] = 4.5 * block
@@ -92,7 +91,7 @@ def calculate_energy(image, saliency_map, depth_map, entropy_energy_normalized):
         1.0 * adjusted_energy_edge +               
         1.0 * adjusted_saliency_map +              
         1.0 * adjusted_depth_map  +               
-        0.5 * -adjusted_entropy                          
+        0.49 * -adjusted_entropy                          
     )
     
     energy_combined = cv2.normalize(energy_combined, None, 0, 255, cv2.NORM_MINMAX, cv2.CV_8U)
@@ -189,11 +188,11 @@ def get_file_paths(category):
 
     entropy_energy = calculate_entropy(image)
     entropy_energy_normalized = cv2.normalize(entropy_energy, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8)
-    cv2.imwrite(f'{base_path}/{category}/{category}_entropy_energy_normalized.png', entropy_energy_normalized) 
+    cv2.imwrite(f'{base_path}/{category}/{category}_entropy_energy.png', entropy_energy_normalized) 
 
     saliency_map_path = f"{base_path}/{category}/{category}_SMap.png"
     depth_map_path = f"{base_path}/{category}/{category}_DMap.png"
-    entropy_energy_path = f"{base_path}/{category}/{category}_entropy_energy_normalized.png"  
+    entropy_energy_path = f"{base_path}/{category}/{category}_entropy_energy.png"  
     energy_map_path = f"{base_path}/{category}/{category}_energy_map.png"  
 
     return input_image_path, saliency_map_path, depth_map_path, entropy_energy_path, energy_map_path
@@ -263,7 +262,7 @@ class SeamCarvingApp:
     def start_seam_carving(self):
         category = self.category.get()
         num_seams_to_remove = self.num_seams_to_remove.get()
-        
+
         if not category or not num_seams_to_remove:
             messagebox.showerror("Input Error", "Both inputs are required!")
             return
@@ -283,9 +282,16 @@ class SeamCarvingApp:
         entropy_energy_normalized = cv2.imread(entropy_energy_path, cv2.IMREAD_GRAYSCALE)
 
         carved_image = seam_carve(image, num_seams_to_remove, saliency_map, depth_map, entropy_energy_normalized, self.update_image)
-        output_path = f'./Samples dataset/{category}/{category}_output.png'
+
+        # Create the result directory if it does not exist
+        result_dir = './result'
+        if not os.path.exists(result_dir):
+            os.makedirs(result_dir)
+
+        output_path = f'{result_dir}/{category}_output_{num_seams_to_remove}.png'
         cv2.imwrite(output_path, carved_image)
         messagebox.showinfo("Success", f"Output image saved to {output_path}")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
