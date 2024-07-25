@@ -126,4 +126,4 @@ These improvements in visual quality make our method a preferable choice for app
 🎉 **We’re excited about contributions and forks!** If you have any questions or suggestions, please feel free to reach out to us:
 
 - Mohammad Hossein: [m.heidari@mi.iut.ac.ir](mailto:m.heidari@mi.iut.ac.ir) 📧
-- AmirReza: [a.zahedinejad@ec.iut.ac.ir](mailto:a.zahedinejad@ec.iut.ac.ir) 📧
+- Amir Reza: [a.zahedinejad@ec.iut.ac.ir](mailto:a.zahedinejad@ec.iut.ac.ir) 📧
