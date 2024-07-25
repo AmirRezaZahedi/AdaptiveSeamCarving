@@ -1,4 +1,4 @@
-### Seam Carving Application README
+### Adaptive Seam Carving Application
 
 #### Overview
 
