@@ -1,12 +1,8 @@
 import cv2
 import numpy as np
-from tqdm import tqdm
-from imageio.v3 import imread, imwrite
 from skimage.util import view_as_windows
-from skimage.filters.rank import entropy
-from skimage.morphology import disk
 import tkinter as tk
-from tkinter import simpledialog, messagebox, filedialog
+from tkinter import messagebox
 from PIL import Image, ImageTk
 
 def calculate_energy(image, saliency_map, depth_map, entropy_energy_normalized):
