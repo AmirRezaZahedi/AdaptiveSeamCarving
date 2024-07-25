@@ -1,8 +1,10 @@
-### Seam Carving Application README
+### Adaptive Seam Carving Application
+
 
 #### Overview
 
-This application is a seam carving tool that allows users to remove vertical seams from an image to reduce its width. The app uses various image processing techniques to calculate energy maps and determine which seams to remove, enhancing image retargeting. The seam carving process takes into account the image's saliency, depth gradient, and entropy maps.
+This application is a seam carving tool that allows users to remove vertical seams from an image to reduce its width. The app uses various image processing techniques to calculate energy maps and determine which seams to remove, enhancing image retargeting. The seam carving process takes into account the image's saliency, depth, gradient, and entropy maps.
+
 
 ### Key Features
 
@@ -31,10 +33,8 @@ This application is a seam carving tool that allows users to remove vertical sea
    ```bash
    pip install opencv-python-headless numpy scikit-image pillow
    ```
-
-3. **Sample Dataset**:
-   In the Samples dataset folder, each subfolder should be named according to the image category (e.g., Diana). Each subfolder should contain the saliency map and depth map for the corresponding images.
-
+3. **Sample Dataset**
+    In the sample_dataset folder, each subfolder should be named according to the image category (e.g., Diana). Each subfolder should contain the saliency map and depth map for the corresponding images.
 ### Usage
 
 1. **Run the Application**:
@@ -110,6 +110,7 @@ In the `calculate_energy` function, we compute the energy map for seam carving u
    - **50% Decrease**:
      ![Snowman 50% Decrease](./result/Snowman_output_227.png)
 
+
 ### Comparison to Existing Methods
 
 Our seam carving approach provides visually superior results compared to the methods outlined in the paper "Seam Carving for Content-Aware Image Resizing" (ICIP 2014) [link to paper](https://projet.liris.cnrs.fr/imagine/pub/proceedings/ICIP-2014/Papers/1569913319.pdf). Specifically, for images categorized as 'people' and 'snowman,' our method excels in preserving important content and minimizing visual distortion. 
@@ -121,3 +122,4 @@ In particular:
 - **For 'snowman' images**: The preservation of the snowman's shape and details is notably better, avoiding the unnatural distortions that can occur with other seam carving techniques. 
 
 These improvements in visual quality make our method a preferable choice for applications requiring high fidelity in image retargeting.
+
